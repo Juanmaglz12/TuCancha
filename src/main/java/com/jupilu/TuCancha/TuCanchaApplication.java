@@ -8,6 +8,8 @@ public class TuCanchaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TuCanchaApplication.class, args);
+
 	}
 
 }
+
