@@ -1,5 +1,6 @@
 package com.jupilu.TuCancha.Controller;
 
+import com.jupilu.TuCancha.Service.PlayerI;
 import com.jupilu.TuCancha.Service.PlayerImp;
 import com.jupilu.TuCancha.model.Player;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +15,11 @@ import java.util.Optional;
 @RequestMapping("/player")
 public class PlayerController {
 
-    private final PlayerImp playerImp;
+    private PlayerI playerI;
 
     @GetMapping("/findPlayerByCelNumber/{celNumber}")
     public ResponseEntity<Player> findPlayerByCelNumber(@PathVariable String celNumber){
-        Player player = playerImp.findPlayerByCelNumber(celNumber);
+        Player player = playerI.findPlayerByCelNumber(celNumber);
         if (player != null){
             return new ResponseEntity<>(player, HttpStatus.OK);
         }else {
@@ -28,7 +29,7 @@ public class PlayerController {
 
     @PostMapping("/savePlayer")
     public ResponseEntity<String> savePlayer(@RequestBody Player player){
-        String mensaje = playerImp.savePlayer(player);
+        String mensaje = playerI.savePlayer(player);
         return new ResponseEntity<>(mensaje, HttpStatus.CREATED);
     }
 

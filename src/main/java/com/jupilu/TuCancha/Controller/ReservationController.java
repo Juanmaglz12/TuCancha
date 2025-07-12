@@ -1,6 +1,7 @@
 package com.jupilu.TuCancha.Controller;
 
 
+import com.jupilu.TuCancha.Service.ReservationI;
 import com.jupilu.TuCancha.Service.ReservationImp;
 import com.jupilu.TuCancha.model.Reservation;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +18,11 @@ import java.util.List;
 @RequestMapping("/reservation")
 public class ReservationController {
 
-    private final ReservationImp reservationImp;
+    private ReservationI reservationI;
 
     @GetMapping("/getAllReservations")
     public ResponseEntity<List<Reservation>> findAll() {
-        List<Reservation> reservations = reservationImp.findAll();
+        List<Reservation> reservations = reservationI.findAll();
         return ResponseEntity.ok(reservations);
     }
 
@@ -31,7 +32,7 @@ public class ReservationController {
             @RequestParam LocalDate date,
             @RequestParam LocalTime time
     ) {
-        Reservation reservation = reservationImp.findReservation(fieldId, date, time);
+        Reservation reservation = reservationI.findReservation(fieldId, date, time);
         if (reservation != null) {
             return new ResponseEntity<>(reservation, HttpStatus.OK);
         } else {
@@ -41,7 +42,7 @@ public class ReservationController {
 
     @PostMapping("/saveReservations")
     public ResponseEntity<String> saveReservations(@RequestBody List<Reservation> reservations) {
-        reservations.forEach(reservationImp::saveReservation);
+        reservations.forEach(reservationI::saveReservation);
         return ResponseEntity.status(HttpStatus.CREATED).body("Reservas creadas");
     }
 

@@ -3,15 +3,17 @@ package com.jupilu.TuCancha.Service;
 import com.jupilu.TuCancha.Repository.FieldRepository;
 import com.jupilu.TuCancha.model.Field;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.service.spi.InjectService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.ApplicationScope;
 
 import java.util.Optional;
 
-@Service
-@RequiredArgsConstructor
+@ApplicationScope
 public class FieldImp implements FieldI {
 
-    private final FieldRepository fieldRepository;
+    private FieldRepository fieldRepository;
 
     @Override
     public String saveField(Field field) {

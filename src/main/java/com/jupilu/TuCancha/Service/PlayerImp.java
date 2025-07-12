@@ -3,13 +3,15 @@ package com.jupilu.TuCancha.Service;
 import com.jupilu.TuCancha.Repository.PlayerRepository;
 import com.jupilu.TuCancha.model.Player;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.ApplicationScope;
 
-@Service
-@RequiredArgsConstructor
+@ApplicationScope
 public class PlayerImp implements PlayerI {
 
-    private final PlayerRepository playerRepository;
+    @Autowired
+    private PlayerRepository playerRepository;
 
     @Override
     public String savePlayer(Player player) {
